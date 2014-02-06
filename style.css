@@ -1,0 +1,27 @@
+body {
+	background-color: #66eeff;
+}
+
+.circle {
+	position: absolute;
+	border-radius: 100%;
+	opacity: 0.6;
+}
+
+.small {
+	height: 100px;
+	width: 100px;
+	background-color: #0088cc;
+}
+
+.med {
+	height: 175px;
+	width: 175px;
+	background-color: #00bbff;
+}
+
+.large {
+	height: 250px;
+	width: 250px;
+	background-color: #0066dd;
+}
