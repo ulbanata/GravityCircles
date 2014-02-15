@@ -9,19 +9,19 @@ body {
 }
 
 .small {
-	height: 100px;
-	width: 100px;
+	height: 10px;
+	width: 10px;
 	background-color: #0088cc;
 }
 
 .med {
-	height: 175px;
-	width: 175px;
+	height: 17px;
+	width: 17px;
 	background-color: #00bbff;
 }
 
 .large {
-	height: 250px;
-	width: 250px;
+	height: 25px;
+	width: 25px;
 	background-color: #0066dd;
 }
