@@ -25,3 +25,9 @@ body {
 	width: 25px;
 	background-color: #0066dd;
 }
+
+.x-large {
+	height: 40px;
+	width: 40px;
+	background-color: yellow;
+}
