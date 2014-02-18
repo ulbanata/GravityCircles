@@ -6,7 +6,7 @@ $(document).ready(function(){
 	var positionY = [];  //y position of the circles
 	var massArr = [];  //Mass of each circle
 	var G = -0.667; //Gravitational Constant
-	var interval = 1;
+	var interval = 10;
 	function randInt(minVal, maxVal) {
 		var rInt = minVal + (Math.random() * (maxVal - minVal));
 		return rInt;
@@ -14,7 +14,7 @@ $(document).ready(function(){
 
 	function Sun(className, id) {
 		var id = id;
-		var mass = 1000000;
+		var mass = 700000;
 		massArr.push(mass);
 		var x = $(window).width()/2;
 		var y = $(window).height()/2;
@@ -37,17 +37,32 @@ $(document).ready(function(){
 
 	function Circle(className, id) {
 		var id = id;
-		var mass = 25000;
+		var mass = 250000;
 		if(className == "circle small"){
-			mass = 10000;
+			mass = 100000;
 		} else if(className == "circle medium"){
-			mass = 17000;
+			mass = 170000;
 		}
 		massArr.push(mass);  //2Adds the mass to the array for access
-		var x = randInt(0, $(window).width());
-		var y = randInt(0, $(window).height());
-		console.log(x)
-		// var radius = 0;
+		var x = randInt($(window).width()*1/3, $(window).width()*2/3);
+		var y = randInt($(window).height()*1/3, $(window).height()*2/3);
+		// var x = randInt(0, $(window).width());
+		// var y = randInt(0, $(window).height());
+		//Tries to get an orbit going with set velocities
+		// if(x > $(window).width()/2 && y > $(window).height()/2) {
+		// 	var xVel = 0;
+		// 	var yVel = -1;
+		// } else if (x < $(window).width()/2 && y > $(window).height()/2) {
+		// 	var xVel = -1;
+		// 	var yVel = 0;
+		// } else if (x < $(window).width()/2 && y < $(window).height()/2) {
+		// 	var xVel = 0;
+		// 	var yVel = 1;
+		// } else {
+		// 	var xVel = 1;
+		// 	var yVel = 0;
+		// }
+		//Uses random initial velocities
 		var xVel = randInt(-1,1);
 		var yVel = randInt(-1,1);
 		var color = "";
@@ -84,33 +99,25 @@ $(document).ready(function(){
 					console.log("y" + y);
 					var xDist = (x - positionX[i]);
 					var yDist = (y - positionY[i]);
-					// console.log("xDist" + xDist);
-					// console.log("yDist" + yDist);
 					var distBetween = Math.sqrt(Math.pow(xDist,2)+Math.pow(yDist,2));
 					var acc = (G*massArr[i])/(Math.pow(distBetween,2));
-					// console.log(acc)
 					var accX = accX + acc*(xDist/distBetween);
 					var accY = accY + acc*(yDist/distBetween);
-					// console.log("accX " + accX);
-					// console.log("accY " + accY);
 				}
 			}
-			xVel = xVel + accX*timeInterval/1000;
-			yVel = yVel + accY*timeInterval/1000;
-			// console.log("timeInt: " + timeInterval)
-			// console.log("xVel: " + xVel);
-			// console.log("yVel: " + yVel);
+			xVel = xVel + accX*timeInterval/100000;
+			yVel = yVel + accY*timeInterval/100000;
 
 		}
 	}
 
 	// floatingCircle();
-	for (var i = 0; i <= 9; i++) {
-		if (i < 3) {
+	for (var i = 0; i <= 6; i++) {
+		if (i < 2) {
 			listOfCircles[i] = new Circle("circle small", i);
-		} else if (i >= 3 && i < 6) {
+		} else if (i >= 2 && i < 4) {
 			listOfCircles[i] = new Circle("circle med", i);
-		} else if (i >= 6 && i < 9) {
+		} else if (i >= 4 && i < 6) {
 			listOfCircles[i] = new Circle("circle large", i);
 		} else
 			listOfCircles[i] = new Sun("circle x-large", i);
@@ -121,13 +128,13 @@ $(document).ready(function(){
 
 		for (var i = 0; i < listOfCircles.length; i++) {
 			listOfCircles[i].updatePosition();
-		}
+		};
 		for (var i = 0; i < listOfCircles.length-1; i++) {
 			listOfCircles[i].updateVelocity(interval);
-		}
+		};
 		for (var i = 0; i < listOfCircles.length-1; i++) {
 			listOfCircles[i].move();
-		}
+		};
 	}, interval);
 });
 
